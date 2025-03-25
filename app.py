@@ -3,7 +3,19 @@ import covid19pandas as cod
 import pandas as pd
 import plotly.express as px
 
-os.environ["COVID19PANDAS_CACHE_DIR"] = "./covid_data"
+# Redirect cache directory to a writable location
+covid_data_path = "./covid_data"
+os.makedirs(covid_data_path, exist_ok=True)
+os.environ["COVID19PANDAS_CACHE_DIR"] = covid_data_path
+
+# Manually set the data directory
+cod.DATA_DIR = covid_data_path
+cod.JHU_DIR = os.path.join(covid_data_path, "jhu")
+cod.NYT_DIR = os.path.join(covid_data_path, "nyt")
+
+# Ensure all subdirectories exist
+os.makedirs(cod.JHU_DIR, exist_ok=True)
+os.makedirs(cod.NYT_DIR, exist_ok=True)
 
 # Load COVID-19 dataset
 global_df = cod.get_data_jhu()
