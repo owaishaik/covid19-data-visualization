@@ -3,6 +3,8 @@ import covid19pandas as cod
 import pandas as pd
 import plotly.express as px
 
+os.environ["COVID19PANDAS_CACHE_DIR"] = "./covid_data"
+
 # Load COVID-19 dataset
 global_df = cod.get_data_jhu()
 
